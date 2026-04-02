@@ -86,6 +86,11 @@ temp/
 .oca/sessions/
 
 # ===========================
+# Local dev docs (not for public repo)
+# ===========================
+mydocs/
+
+# ===========================
 # Cursor IDE
 # ===========================
 .cursorignore
