@@ -1,6 +1,7 @@
 import { c as _c } from "react/compiler-runtime";
 import figures from 'figures';
 import React, { useCallback, useState } from 'react';
+import { t } from '../../../i18n/index.js';
 import type { KeyboardEvent } from '../../../ink/events/keyboard-event.js';
 import { Box, Text } from '../../../ink.js';
 import { useAppState } from '../../../state/AppState.js';
@@ -185,7 +186,7 @@ export function QuestionView(t0) {
       t8 = $[21];
     }
     handleOpenEditor = t8;
-    const t9 = question.multiSelect ? "Type something" : "Type something.";
+    const t9 = t('general.question.typeSomething') + (question.multiSelect ? '' : '.');
     const t10 = questionState?.textInputValue ?? "";
     let t11;
     if ($[22] !== onUpdateQuestionState || $[23] !== question.multiSelect || $[24] !== questionText) {

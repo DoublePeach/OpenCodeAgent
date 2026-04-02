@@ -106,6 +106,20 @@ export async function showSetupScreens(root: Root, permissionMode: PermissionMod
   ) {
     return false;
   }
+
+  // ── OpenCodeAgent: show setup wizard if no provider is configured ──────────
+  {
+    const { isSetupComplete } = await import('./utils/ocaSettings.js');
+    if (!isSetupComplete()) {
+      const { SetupWizard } = await import('./screens/SetupWizard.js');
+      await showSetupDialog(root, done => <SetupWizard
+        onComplete={_settings => { void done(); }}
+        onSkip={() => { void done(); }}
+      />, { onChangeAppState });
+    }
+  }
+  // ─────────────────────────────────────────────────────────────────────────────
+
   const config = getGlobalConfig();
   let onboardingShown = false;
   if (!config.theme || !config.hasCompletedOnboarding // always show onboarding at least once

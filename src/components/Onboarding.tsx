@@ -114,12 +114,8 @@ export function Onboarding({
     goToNextStep();
   }
   const steps: OnboardingStep[] = [];
-  if (oauthEnabled) {
-    steps.push({
-      id: 'preflight',
-      component: preflightStep
-    });
-  }
+  // OpenCodeAgent: preflight and OAuth steps removed.
+  // Provider connectivity is handled in SetupWizard instead.
   steps.push({
     id: 'theme',
     component: themeStep
@@ -128,14 +124,6 @@ export function Onboarding({
     steps.push({
       id: 'api-key',
       component: <ApproveApiKey customApiKeyTruncated={apiKeyNeedingApproval} onDone={handleApiKeyDone} />
-    });
-  }
-  if (oauthEnabled) {
-    steps.push({
-      id: 'oauth',
-      component: <SkippableStep skip={skipOAuth} onSkip={goToNextStep}>
-          <ConsoleOAuthFlow onDone={goToNextStep} />
-        </SkippableStep>
     });
   }
   steps.push({

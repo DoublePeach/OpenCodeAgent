@@ -98,6 +98,15 @@ function isManagedOAuthContext(): boolean {
 /** Whether we are supporting direct 1P auth. */
 // this code is closely related to getAuthTokenSource
 export function isAnthropicAuthEnabled(): boolean {
+  // OpenCodeAgent: OCA provider or OpenAI-compat key → Anthropic auth not applicable.
+  if (
+    process.env['OCA_PROVIDER'] === 'openai-compat' ||
+    process.env['OCA_PROVIDER'] === 'ollama' ||
+    process.env['OPENAI_API_KEY']
+  ) {
+    return false
+  }
+
   // --bare: API-key-only, never OAuth.
   if (isBareMode()) return false
 
