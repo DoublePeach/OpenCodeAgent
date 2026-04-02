@@ -189,8 +189,8 @@ CLI 参数 > 环境变量 > ~/.oca/settings.json（全局）> .claude/settings.j
 ### 路线图
 
 - [x] 项目初始化，架构梳理
-- [ ] **M1**：去遥测、去强制认证，基础版本可运行
-- [ ] **M2**：OpenAI 兼容适配层（DeepSeek / 百炼 / Doubao / Ollama）
+- [x] **M1**：去遥测、去强制认证，基础版本可运行
+- [x] **M2**：OpenAI 兼容适配层（DeepSeek / 百炼 / Doubao / Ollama）
 - [ ] **M3**：中文 UI + 首次启动配置向导 + Profile 系统
 - [ ] **M4**：公开发布，完善文档和贡献指南
 - [ ] **M5**：Node.js 兼容 / 离线优先模式 / 费用追踪
@@ -265,8 +265,8 @@ bun run dev
 ### Roadmap
 
 - [x] Project initialization & architecture review
-- [ ] **M1**: Remove telemetry & forced auth
-- [ ] **M2**: OpenAI-compatible provider adapter (DeepSeek, Qwen, Doubao, Ollama)
+- [x] **M1**: Remove telemetry & forced auth
+- [x] **M2**: OpenAI-compatible provider adapter (DeepSeek, Qwen, Doubao, Ollama)
 - [ ] **M3**: Chinese UI + Setup Wizard + Profile system
 - [ ] **M4**: Public release with full documentation
 - [ ] **M5**: Node.js compatibility / Offline-first / Cost tracking
