@@ -1,0 +1,92 @@
+# ===========================
+# Dependencies
+# ===========================
+node_modules/
+.pnp
+.pnp.js
+
+# ===========================
+# Build outputs
+# ===========================
+dist/
+build/
+out/
+*.tsbuildinfo
+
+# ===========================
+# Environment & Secrets
+# ===========================
+.env
+.env.local
+.env.*.local
+.env.development
+.env.production
+*.key
+*.pem
+
+# ===========================
+# Logs
+# ===========================
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+bun-error.log*
+logs/
+
+# ===========================
+# OS files
+# ===========================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ===========================
+# IDE / Editor
+# ===========================
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.swp
+
+# ===========================
+# Testing / Coverage
+# ===========================
+coverage/
+.nyc_output/
+*.lcov
+
+# ===========================
+# Bun
+# ===========================
+# bun.lockb is intentionally NOT ignored — keep for reproducible installs
+
+# ===========================
+# Temporary files
+# ===========================
+*.tmp
+*.temp
+.cache/
+tmp/
+temp/
+
+# ===========================
+# Claude / OCA runtime data
+# ===========================
+.claude/sessions/
+.oca/sessions/
+
+# ===========================
+# Cursor IDE
+# ===========================
+.cursorignore
+.cursor/
