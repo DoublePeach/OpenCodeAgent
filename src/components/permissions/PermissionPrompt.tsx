@@ -1,6 +1,7 @@
 import { c as _c } from "react/compiler-runtime";
 import React, { type ReactNode, useCallback, useMemo, useState } from 'react';
 import { Box, Text } from '../../ink.js';
+import { t } from '../../i18n/index.js';
 import type { KeybindingAction } from '../../keybindings/types.js';
 import { useKeybindings } from '../../keybindings/useKeybinding.js';
 import { type AnalyticsMetadata_I_VERIFIED_THIS_IS_NOT_CODE_OR_FILEPATHS, logEvent } from '../../services/analytics/index.js';
@@ -51,7 +52,7 @@ export function PermissionPrompt(t0) {
     question: t1,
     toolAnalyticsContext
   } = t0;
-  const question = t1 === undefined ? "Do you want to proceed?" : t1;
+  const question = t1 === undefined ? t('permissions.prompt.defaultQuestion') : t1;
   const setAppState = useSetAppState();
   const [acceptFeedback, setAcceptFeedback] = useState("");
   const [rejectFeedback, setRejectFeedback] = useState("");

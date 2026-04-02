@@ -1,6 +1,7 @@
 import { c as _c } from "react/compiler-runtime";
 // biome-ignore-all assist/source/organizeImports: ANT-ONLY import markers must not be reordered
 import { feature } from 'bun:bundle';
+import { t } from '../i18n/index.js';
 import { spawnSync } from 'child_process';
 import { snapshotOutputTokensForTurn, getCurrentTurnTokenBudget, getTurnOutputTokens, getBudgetContinuationCount, getTotalInputTokens } from '../bootstrap/state.js';
 import { parseTokenBudget } from '../utils/tokenBudget.js';
@@ -3966,12 +3967,12 @@ export function REPL({
       addNotif({
         key: 'idle-return-hint',
         jsx: mode === 'hint_v2' ? <>
-                <Text dimColor>new task? </Text>
+                <Text dimColor>{t('repl.idle.newTask')} </Text>
                 <Text color="suggestion">/clear</Text>
-                <Text dimColor> to save </Text>
-                <Text color="suggestion">{formattedTokens} tokens</Text>
+                <Text dimColor> {t('repl.idle.clearHint')} </Text>
+                <Text color="suggestion">{formattedTokens} {t('repl.idle.tokens')}</Text>
               </> : <Text color="warning">
-                new task? /clear to save {formattedTokens} tokens
+                {t('repl.idle.newTask')} /clear {t('repl.idle.clearHint')} {formattedTokens} {t('repl.idle.tokens')}
               </Text>,
         priority: 'medium',
         // Persist until submit — the hint fires at T+75min idle, user may

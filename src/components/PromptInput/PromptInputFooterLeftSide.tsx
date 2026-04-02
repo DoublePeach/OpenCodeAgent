@@ -6,6 +6,7 @@ import { feature } from 'bun:bundle';
 const coordinatorModule = feature('COORDINATOR_MODE') ? require('../../coordinator/coordinatorMode.js') as typeof import('../../coordinator/coordinatorMode.js') : undefined;
 /* eslint-enable @typescript-eslint/no-require-imports */
 import { Box, Text, Link } from '../../ink.js';
+import { t } from '../../i18n/index.js';
 import * as React from 'react';
 import figures from 'figures';
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
@@ -147,7 +148,7 @@ export function PromptInputFooterLeftSide(t0) {
   if (exitMessage.show) {
     let t1;
     if ($[0] !== exitMessage.key) {
-      t1 = <Text dimColor={true} key="exit-message">Press {exitMessage.key} again to exit</Text>;
+      t1 = <Text dimColor={true} key="exit-message">{t('promptInput.footer.pressAgainExit', { key: exitMessage.key ?? '' })}</Text>;
       $[0] = exitMessage.key;
       $[1] = t1;
     } else {
@@ -158,7 +159,7 @@ export function PromptInputFooterLeftSide(t0) {
   if (isPasting) {
     let t1;
     if ($[2] === Symbol.for("react.memo_cache_sentinel")) {
-      t1 = <Text dimColor={true} key="pasting-message">Pasting text…</Text>;
+      t1 = <Text dimColor={true} key="pasting-message">{t('promptInput.footer.pasting')}</Text>;
       $[2] = t1;
     } else {
       t1 = $[2];
@@ -188,7 +189,7 @@ export function PromptInputFooterLeftSide(t0) {
   }
   let t3;
   if ($[11] !== showVim) {
-    t3 = showVim ? <Text dimColor={true} key="vim-insert">-- INSERT --</Text> : null;
+    t3 = showVim ? <Text dimColor={true} key="vim-insert">{t('promptInput.footer.insertMode')}</Text> : null;
     $[11] = showVim;
     $[12] = t3;
   } else {

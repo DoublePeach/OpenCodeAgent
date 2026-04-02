@@ -1,5 +1,6 @@
 import { feature } from 'bun:bundle'
 import { useMemo } from 'react'
+import { t } from 'src/i18n/index.js'
 import { useCommandQueue } from 'src/hooks/useCommandQueue.js'
 import { useAppState } from 'src/state/AppState.js'
 import { getGlobalConfig } from 'src/utils/config.js'
@@ -40,7 +41,7 @@ export function usePromptInputPlaceholder({
         viewingAgentName.length > MAX_TEAMMATE_NAME_LENGTH
           ? viewingAgentName.slice(0, MAX_TEAMMATE_NAME_LENGTH - 3) + '...'
           : viewingAgentName
-      return `Message @${displayName}…`
+      return t('promptInput.placeholder.messageAgent', { name: displayName })
     }
 
     // Show queue hint if user has not seen it yet.
@@ -51,7 +52,7 @@ export function usePromptInputPlaceholder({
       (getGlobalConfig().queuedCommandUpHintCount || 0) <
         NUM_TIMES_QUEUE_HINT_SHOWN
     ) {
-      return 'Press up to edit queued messages'
+      return t('promptInput.placeholder.pressUpEdit')
     }
 
     // Show example command if user has not submitted yet and suggestions are enabled.

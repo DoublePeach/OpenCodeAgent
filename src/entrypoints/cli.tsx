@@ -71,6 +71,14 @@ async function main(): Promise<void> {
         return;
     }
 
+    // ── OpenCodeAgent: apply saved OCA settings before anything else ──────────
+    // This loads ~/.oca/settings.json and injects provider/lang/key env vars
+    // so the rest of the stack (provider registry, i18n) picks them up.
+    {
+        const { applyOcaSettings } = await import("../utils/ocaSettings.js");
+        applyOcaSettings();
+    }
+
     // For all other paths, load the startup profiler
     const { profileCheckpoint } = await import("../utils/startupProfiler.js");
     profileCheckpoint("cli_entry");
