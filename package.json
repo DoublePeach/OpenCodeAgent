@@ -1,31 +1,35 @@
 {
-  "name": "claude-js",
-  "version": "1.0.3",
-  "description": "Reverse-engineered Anthropic Claude Code CLI — interactive AI coding assistant in the terminal",
+  "name": "opencodeagent",
+  "version": "0.1.0",
+  "description": "Open-source, local-first, multi-model AI coding assistant CLI — supporting Anthropic, DeepSeek, Qwen, Ollama and any OpenAI-compatible provider",
   "type": "module",
-  "author": "claude-code-best <claude-code-best@proton.me>",
+  "author": "DoublePeach",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/claude-code-best/claude-code.git"
+    "url": "git+https://github.com/DoublePeach/OpenCodeAgent.git"
   },
-  "homepage": "https://github.com/claude-code-best/claude-code#readme",
+  "homepage": "https://github.com/DoublePeach/OpenCodeAgent#readme",
   "bugs": {
-    "url": "https://github.com/claude-code-best/claude-code/issues"
+    "url": "https://github.com/DoublePeach/OpenCodeAgent/issues"
   },
   "keywords": [
-    "claude",
-    "anthropic",
-    "cli",
     "ai",
+    "cli",
     "coding-assistant",
     "terminal",
-    "repl"
+    "local-llm",
+    "ollama",
+    "deepseek",
+    "openai-compatible",
+    "multi-model",
+    "open-source"
   ],
   "engines": {
     "bun": ">=1.2.0"
   },
   "bin": {
-    "claude-js": "dist/cli.js"
+    "oca": "dist/cli.js",
+    "opencodeagent": "dist/cli.js"
   },
   "workspaces": [
     "packages/*",

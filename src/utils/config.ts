@@ -695,11 +695,8 @@ export function resetTrustDialogAcceptedCacheForTesting(): void {
 }
 
 export function checkHasTrustDialogAccepted(): boolean {
-  // Trust only transitions false→true during a session (never the reverse),
-  // so once true we can latch it. false is not cached — it gets re-checked
-  // on every call so that trust dialog acceptance is picked up mid-session.
-  // (lodash memoize doesn't fit here because it would also cache false.)
-  return (_trustAccepted ||= computeTrustDialogAccepted())
+  // OpenCodeAgent: trust dialog removed — always return true.
+  return true
 }
 
 function computeTrustDialogAccepted(): boolean {
