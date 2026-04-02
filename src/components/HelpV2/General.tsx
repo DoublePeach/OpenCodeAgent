@@ -1,22 +1,19 @@
 import { c as _c } from "react/compiler-runtime";
 import * as React from 'react';
+import { t } from '../../i18n/index.js';
 import { Box, Text } from '../../ink.js';
 import { PromptInputHelpMenu } from '../PromptInput/PromptInputHelpMenu.js';
 export function General() {
-  const $ = _c(2);
-  let t0;
-  if ($[0] === Symbol.for("react.memo_cache_sentinel")) {
-    t0 = <Box><Text>Claude understands your codebase, makes edits with your permission, and executes commands — right from your terminal.</Text></Box>;
-    $[0] = t0;
-  } else {
-    t0 = $[0];
-  }
-  let t1;
-  if ($[1] === Symbol.for("react.memo_cache_sentinel")) {
-    t1 = <Box flexDirection="column" paddingY={1} gap={1}>{t0}<Box flexDirection="column"><Box><Text bold={true}>Shortcuts</Text></Box><PromptInputHelpMenu gap={2} fixedWidth={true} /></Box></Box>;
-    $[1] = t1;
-  } else {
-    t1 = $[1];
-  }
-  return t1;
+  // Do NOT memoize: description and shortcuts label are locale-reactive
+  const description = t('help.general.description');
+  const shortcutsLabel = t('help.general.shortcuts');
+  return (
+    <Box flexDirection="column" paddingY={1} gap={1}>
+      <Box><Text>{description}</Text></Box>
+      <Box flexDirection="column">
+        <Box><Text bold={true}>{shortcutsLabel}</Text></Box>
+        <PromptInputHelpMenu gap={2} fixedWidth={true} />
+      </Box>
+    </Box>
+  );
 }

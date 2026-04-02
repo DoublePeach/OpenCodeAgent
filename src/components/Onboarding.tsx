@@ -1,5 +1,6 @@
 import { c as _c } from "react/compiler-runtime";
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { t } from 'src/i18n/index.js';
 import { type AnalyticsMetadata_I_VERIFIED_THIS_IS_NOT_CODE_OR_FILEPATHS, logEvent } from 'src/services/analytics/index.js';
 import { setupTerminal, shouldOfferTerminalSetup } from '../commands/terminalSetup/terminalSetup.js';
 import { useExitOnCtrlCDWithKeybindings } from '../hooks/useExitOnCtrlCDWithKeybindings.js';
@@ -63,30 +64,24 @@ export function Onboarding({
     />
     </Box>;
   const securityStep = <Box flexDirection="column" gap={1} paddingLeft={1}>
-      <Text bold>Security notes:</Text>
+      <Text bold>{t('onboarding.security.title')}</Text>
       <Box flexDirection="column" width={70}>
-        {/**
-         * OrderedList misnumbers items when rendering conditionally,
-         * so put all items in the if/else
-         */}
         <OrderedList>
           <OrderedList.Item>
-            <Text>Claude can make mistakes</Text>
+            <Text>{t('onboarding.security.canMakeMistakes')}</Text>
             <Text dimColor wrap="wrap">
-              You should always review Claude&apos;s responses, especially when
-              <Newline />
-              running code.
+              {t('onboarding.security.canMakeMistakesDetail')}
               <Newline />
             </Text>
           </OrderedList.Item>
           <OrderedList.Item>
             <Text>
-              Due to prompt injection risks, only use it with code you trust
+              {t('onboarding.security.promptInjection')}
             </Text>
             <Text dimColor wrap="wrap">
               For more details see:
               <Newline />
-              <Link url="https://code.claude.com/docs/en/security" />
+              <Link url="https://github.com/DoublePeach/OpenCodeAgent" />
             </Text>
           </OrderedList.Item>
         </OrderedList>

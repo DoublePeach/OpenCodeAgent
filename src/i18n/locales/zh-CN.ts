@@ -154,7 +154,7 @@ export const zhCN: TranslationKeys = {
       waiting: '等待中 {duration}',
       pressAgainExit: '再次按 {key} 退出',
       pasting: '粘贴文本中…',
-      insertMode: '-- 插入 --',
+      insertMode: '-- 插入模式 --',
       bashMode: '! 进入 Bash 模式',
       interrupt: '中断',
       stopAgents: '停止 Agents',
@@ -173,17 +173,17 @@ export const zhCN: TranslationKeys = {
     help: {
       newline: '{keys} 换行',
       bashMode: '! 进入 Bash 模式',
-      commands: '/ 查看命令',
+      commands: '/ 查看命令列表',
       filePaths: '@ 引用文件路径',
       background: '& 后台任务',
       sideQuestion: '/btw 提一个附加问题',
-      doubleTapClear: '双击 esc 清空输入',
+      doubleTapClear: '双击 Esc 清空输入',
       autoAcceptEdits: '自动接受编辑',
       cycleMode: '切换模式',
       verboseOutput: '{key} 详细输出',
       toggleTasks: '{key} 切换任务面板',
       undo: '{key} 撤销',
-      suspend: 'ctrl + z 挂起',
+      suspend: 'Ctrl+Z 挂起',
       pasteImages: '{key} 粘贴图片',
       switchModel: '{key} 切换模型',
       toggleFastMode: '{key} 切换快速模式',
@@ -221,6 +221,27 @@ export const zhCN: TranslationKeys = {
       typeSomething: '请输入内容',
     },
     pressAgainExit: '再次按 {key} 退出',
+    escToCancel: '{key} 取消',
+  },
+
+  help: {
+    title: 'OpenCodeAgent v{version}',
+    tabs: {
+      general: '常规',
+      commands: '命令',
+      customCommands: '自定义命令',
+    },
+    general: {
+      description:
+        'OpenCodeAgent 理解你的代码库，在你的许可下进行编辑并执行命令——直接在终端中运行。',
+      shortcuts: '快捷键',
+    },
+    commands: {
+      browseDefault: '浏览内置命令：',
+      browseCustom: '浏览自定义命令：',
+      noCustom: '未找到自定义命令',
+    },
+    forMoreHelp: '更多帮助：',
   },
 
   tips: {
@@ -252,6 +273,7 @@ export const zhCN: TranslationKeys = {
     language: {
       title: '选择界面语言',
       hint: '仅影响界面显示，系统提示词保持英文以保证效果。',
+      changed: '语言已切换为 {lang}',
     },
     done: {
       title: '配置完成！',
@@ -262,5 +284,36 @@ export const zhCN: TranslationKeys = {
     back: '上一步',
     next: '下一步',
     finish: '完成',
+  },
+
+  language: {
+    title: 'Language / 语言',
+    hint: '仅影响界面 · UI only — system prompts stay in English',
+    cancel: 'Esc 取消',
+    changed: '语言已设置为：{lang}',
+  },
+
+  providerCmd: {
+    titlePick: '切换模型厂商与大模型',
+    hintPick: '选择后端（Anthropic、OpenAI 兼容、Ollama 等）。将写入 ~/.oca/settings.json',
+    navPick: '↑↓ 选择 · Enter 进入配置 · Esc 取消',
+    titleConfigure: '地址与模型',
+    hintConfigure: 'Tab 切换字段 · Enter 保存（当前会话立即生效）· Esc 返回厂商列表',
+    vendor: '厂商：',
+    keyPlaceholder: '留空则保留已保存的 Key',
+    navConfigure: 'Tab · Enter 保存 · Esc 返回厂商',
+    applied: '已切换为 {vendor} · 模型 {model}',
+  },
+
+  onboarding: {
+    security: {
+      title: '安全提示：',
+      canMakeMistakes: 'OpenCodeAgent 可能会犯错',
+      canMakeMistakesDetail: '请始终审核 Agent 的操作，尤其是执行代码时。',
+      promptInjection: '由于提示注入风险，请仅在可信代码中使用',
+    },
+    terminal: {
+      title: '使用 OpenCodeAgent 的终端设置？',
+    },
   },
 }

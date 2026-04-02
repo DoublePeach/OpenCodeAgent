@@ -1,5 +1,6 @@
 import { c as _c } from "react/compiler-runtime";
 import * as React from 'react';
+import { t } from 'src/i18n/index.js';
 import { useExitOnCtrlCDWithKeybindings } from 'src/hooks/useExitOnCtrlCDWithKeybindings.js';
 import { useShortcutDisplay } from 'src/keybindings/useShortcutDisplay.js';
 import { builtInCommandNames, type Command, type CommandResultDisplay, INTERNAL_ONLY_COMMANDS } from '../../commands.js';
@@ -79,7 +80,7 @@ export function HelpV2(t0) {
   const customCommands = t3;
   let t4;
   if ($[8] === Symbol.for("react.memo_cache_sentinel")) {
-    t4 = <Tab key="general" title="general"><General /></Tab>;
+    t4 = <Tab key="general" title={t('help.tabs.general')}><General /></Tab>;
     $[8] = t4;
   } else {
     t4 = $[8];
@@ -89,7 +90,7 @@ export function HelpV2(t0) {
     tabs = [t4];
     let t5;
     if ($[16] !== builtinCommands || $[17] !== close || $[18] !== columns || $[19] !== maxHeight) {
-      t5 = <Tab key="commands" title="commands"><Commands commands={builtinCommands} maxHeight={maxHeight} columns={columns} title="Browse default commands:" onCancel={close} /></Tab>;
+      t5 = <Tab key="commands" title={t('help.tabs.commands')}><Commands commands={builtinCommands} maxHeight={maxHeight} columns={columns} title={t('help.commands.browseDefault')} onCancel={close} /></Tab>;
       $[16] = builtinCommands;
       $[17] = close;
       $[18] = columns;
@@ -101,7 +102,7 @@ export function HelpV2(t0) {
     tabs.push(t5);
     let t6;
     if ($[21] !== close || $[22] !== columns || $[23] !== customCommands || $[24] !== maxHeight) {
-      t6 = <Tab key="custom" title="custom-commands"><Commands commands={customCommands} maxHeight={maxHeight} columns={columns} title="Browse custom commands:" emptyMessage="No custom commands found" onCancel={close} /></Tab>;
+      t6 = <Tab key="custom" title={t('help.tabs.customCommands')}><Commands commands={customCommands} maxHeight={maxHeight} columns={columns} title={t('help.commands.browseCustom')} emptyMessage={t('help.commands.noCustom')} onCancel={close} /></Tab>;
       $[21] = close;
       $[22] = columns;
       $[23] = customCommands;
@@ -138,7 +139,7 @@ export function HelpV2(t0) {
   const t5 = insideModal ? undefined : maxHeight;
   let t6;
   if ($[31] !== tabs) {
-    t6 = <Tabs title={false ? "/help" : `Claude Code v${MACRO.VERSION}`} color="professionalBlue" defaultTab="general">{tabs}</Tabs>;
+    t6 = <Tabs title={false ? "/help" : t('help.title', { version: MACRO.VERSION })} color="professionalBlue" defaultTab={t('help.tabs.general')}>{tabs}</Tabs>;
     $[31] = tabs;
     $[32] = t6;
   } else {
@@ -146,14 +147,14 @@ export function HelpV2(t0) {
   }
   let t7;
   if ($[33] === Symbol.for("react.memo_cache_sentinel")) {
-    t7 = <Box marginTop={1}><Text>For more help:{" "}<Link url="https://code.claude.com/docs/en/overview" /></Text></Box>;
+    t7 = <Box marginTop={1}><Text>{t('help.forMoreHelp')}{" "}<Link url="https://github.com/DoublePeach/OpenCodeAgent" /></Text></Box>;
     $[33] = t7;
   } else {
     t7 = $[33];
   }
   let t8;
   if ($[34] !== dismissShortcut || $[35] !== exitState.keyName || $[36] !== exitState.pending) {
-    t8 = <Box marginTop={1}><Text dimColor={true}>{exitState.pending ? <>Press {exitState.keyName} again to exit</> : <Text italic={true}>{dismissShortcut} to cancel</Text>}</Text></Box>;
+    t8 = <Box marginTop={1}><Text dimColor={true}>{exitState.pending ? <>{t('general.pressAgainExit', { key: exitState.keyName })}</> : <Text italic={true}>{t('general.escToCancel', { key: dismissShortcut })}</Text>}</Text></Box>;
     $[34] = dismissShortcut;
     $[35] = exitState.keyName;
     $[36] = exitState.pending;

@@ -55,6 +55,7 @@ import bughunter from './commands/bughunter/index.js'
 import terminalSetup from './commands/terminalSetup/index.js'
 import usage from './commands/usage/index.js'
 import theme from './commands/theme/index.js'
+import language from './commands/language/index.js'
 import vim from './commands/vim/index.js'
 import { feature } from 'bun:bundle'
 // Dead code elimination: conditional imports
@@ -173,6 +174,7 @@ import env from './commands/env/index.js'
 import exit from './commands/exit/index.js'
 import exportCommand from './commands/export/index.js'
 import model from './commands/model/index.js'
+import provider from './commands/provider/index.js'
 import tag from './commands/tag/index.js'
 import outputStyle from './commands/output-style/index.js'
 import remoteEnv from './commands/remote-env/index.js'
@@ -288,6 +290,7 @@ const COMMANDS = memoize((): Command[] => [
   memory,
   mobile,
   model,
+  provider,
   outputStyle,
   remoteEnv,
   plugin,
@@ -304,6 +307,7 @@ const COMMANDS = memoize((): Command[] => [
   stickers,
   tag,
   theme,
+  language,
   feedback,
   review,
   ultrareview,

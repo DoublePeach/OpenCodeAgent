@@ -44,6 +44,8 @@ import { getEffortSuffix } from '../../utils/effort.js';
 import { useMainLoopModel } from '../../hooks/useMainLoopModel.js';
 import { renderModelSetting } from '../../utils/model/model.js';
 const LEFT_PANEL_MAX_WIDTH = 50;
+/** OpenCodeAgent: always show full header (Clawd + side feeds), never the one-line condensed logo after first run. */
+const OCA_FULL_WELCOME_EVERY_SESSION = true;
 export function LogoV2() {
   const $ = _c(94);
   const activities = getRecentActivitySync();
@@ -115,7 +117,11 @@ export function LogoV2() {
   useEffect(t2, t3);
   let t4;
   if ($[5] === Symbol.for("react.memo_cache_sentinel")) {
-    t4 = !hasReleaseNotes && !showOnboarding && !isEnvTruthy(process.env.CLAUDE_CODE_FORCE_FULL_LOGO);
+    t4 =
+      !OCA_FULL_WELCOME_EVERY_SESSION &&
+      !hasReleaseNotes &&
+      !showOnboarding &&
+      !isEnvTruthy(process.env.CLAUDE_CODE_FORCE_FULL_LOGO);
     $[5] = t4;
   } else {
     t4 = $[5];
@@ -176,7 +182,12 @@ export function LogoV2() {
     t10 = $[14];
   }
   const modelDisplayName = t10;
-  if (!hasReleaseNotes && !showOnboarding && !isEnvTruthy(process.env.CLAUDE_CODE_FORCE_FULL_LOGO)) {
+  if (
+    !OCA_FULL_WELCOME_EVERY_SESSION &&
+    !hasReleaseNotes &&
+    !showOnboarding &&
+    !isEnvTruthy(process.env.CLAUDE_CODE_FORCE_FULL_LOGO)
+  ) {
     let t11;
     let t12;
     let t13;

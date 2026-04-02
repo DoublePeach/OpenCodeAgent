@@ -15,25 +15,19 @@ import * as React from 'react'
 import { useCallback, useEffect, useState } from 'react'
 import { Box, Text, useInput } from '../ink.js'
 import { t, initI18n } from '../i18n/index.js'
+import { WelcomeV2 } from '../components/LogoV2/WelcomeV2.js'
+import { type OcaSettings, patchOcaSettings } from '../utils/ocaSettings.js'
 import {
-  type OcaSettings,
-  patchOcaSettings,
-  writeOcaSettings,
-} from '../utils/ocaSettings.js'
+  OCA_PROVIDER_CATALOG,
+  persistAndApplyOcaSettings,
+  type OcaProviderCatalogEntry,
+} from '../utils/ocaProviderCatalog.js'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
 type WizardStep = 'language' | 'provider' | 'apikey' | 'connectivity' | 'done'
 
-interface ProviderOption {
-  id: string
-  label: string
-  type: OcaSettings['provider']
-  defaultBaseUrl?: string
-  defaultModel?: string
-  needsApiKey: boolean
-  needsBaseUrl: boolean
-}
+type ProviderOption = OcaProviderCatalogEntry
 
 type ConnectivityStatus = 'idle' | 'testing' | 'success' | 'failed'
 
@@ -49,70 +43,6 @@ type Props = {
 const LANGUAGES = [
   { code: 'en', label: 'English' },
   { code: 'zh-CN', label: '简体中文' },
-]
-
-// ── Provider definitions ──────────────────────────────────────────────────────
-
-const PROVIDERS: ProviderOption[] = [
-  {
-    id: 'anthropic',
-    label: 'Anthropic Claude (Official)',
-    type: 'anthropic',
-    needsApiKey: true,
-    needsBaseUrl: false,
-  },
-  {
-    id: 'deepseek',
-    label: 'DeepSeek',
-    type: 'openai-compat',
-    defaultBaseUrl: 'https://api.deepseek.com',
-    defaultModel: 'deepseek-chat',
-    needsApiKey: true,
-    needsBaseUrl: false,
-  },
-  {
-    id: 'qwen',
-    label: '阿里百炼 / Qwen',
-    type: 'openai-compat',
-    defaultBaseUrl: 'https://dashscope.aliyuncs.com/compatible-mode/v1',
-    defaultModel: 'qwen-max',
-    needsApiKey: true,
-    needsBaseUrl: false,
-  },
-  {
-    id: 'doubao',
-    label: '火山引擎 / Doubao',
-    type: 'openai-compat',
-    defaultBaseUrl: 'https://ark.cn-beijing.volces.com/api/v3',
-    defaultModel: 'doubao-1-5-pro-32k',
-    needsApiKey: true,
-    needsBaseUrl: false,
-  },
-  {
-    id: 'openai',
-    label: 'OpenAI',
-    type: 'openai-compat',
-    defaultBaseUrl: 'https://api.openai.com/v1',
-    defaultModel: 'gpt-4o',
-    needsApiKey: true,
-    needsBaseUrl: false,
-  },
-  {
-    id: 'ollama',
-    label: 'Ollama (Local / 本地)',
-    type: 'ollama',
-    defaultBaseUrl: 'http://localhost:11434',
-    defaultModel: 'qwen2.5-coder:7b',
-    needsApiKey: false,
-    needsBaseUrl: true,
-  },
-  {
-    id: 'custom',
-    label: 'Custom OpenAI-compatible / 自定义',
-    type: 'openai-compat',
-    needsApiKey: true,
-    needsBaseUrl: true,
-  },
 ]
 
 // ── Connectivity test ─────────────────────────────────────────────────────────
@@ -264,7 +194,7 @@ export function SetupWizard({ onComplete, onSkip }: Props) {
   const [connectivityError, setConnectivityError] = useState('')
   const [activeField, setActiveField] = useState<'apikey' | 'baseurl' | 'model'>('apikey')
 
-  const selectedProvider = PROVIDERS[providerIndex]!
+  const selectedProvider = OCA_PROVIDER_CATALOG[providerIndex]!
   const selectedLang = LANGUAGES[langIndex]!
 
   // Prefill defaults when provider changes
@@ -311,19 +241,7 @@ export function SetupWizard({ onComplete, onSkip }: Props) {
 
   const applyAndFinish = useCallback(() => {
     const settings = buildSettings()
-    writeOcaSettings(settings)
-    // Apply settings to current process env so the main loop picks them up
-    if (settings.language) process.env['OCA_LANG'] = settings.language
-    if (settings.provider) process.env['OCA_PROVIDER'] = settings.provider
-    if (settings.openaiBaseUrl) process.env['OPENAI_BASE_URL'] = settings.openaiBaseUrl
-    if (settings.apiKey) {
-      if (settings.provider === 'anthropic') {
-        process.env['ANTHROPIC_API_KEY'] = settings.apiKey
-      } else {
-        process.env['OPENAI_API_KEY'] = settings.apiKey
-      }
-    }
-    if (settings.model) process.env['OCA_MODEL'] = settings.model
+    persistAndApplyOcaSettings(settings)
     onComplete(settings)
   }, [buildSettings, onComplete])
 
@@ -379,19 +297,21 @@ export function SetupWizard({ onComplete, onSkip }: Props) {
 
   return (
     <Box flexDirection="column" padding={1}>
+      {/* ASCII Logo — shown only on first step */}
+      {step === 'language' && <WelcomeV2 />}
+
       {/* Header */}
       <Box flexDirection="column" marginBottom={1}>
-        <Text bold color="cyan">
-          ◆ OpenCodeAgent {t('setup.welcome')}
-        </Text>
-        <Text dimColor>{t('setup.subtitle')}</Text>
-        {step !== 'done' && (
-          <Text dimColor>
-            {t('setup.step', { current: stepNums[step], total: totalSteps })}
-            {'  '}
-            <Text color="gray">Esc {t('setup.skip')}</Text>
-          </Text>
+        {step !== 'language' && (
+          <Text bold color="cyan">◆ OpenCodeAgent</Text>
         )}
+        <Text dimColor>
+          {step === 'language'
+            ? 'First-run setup / 首次启动配置'
+            : t('setup.step', { current: stepNums[step], total: totalSteps })}
+          {'  '}
+          <Text color="gray">Esc {t('setup.skip')}</Text>
+        </Text>
       </Box>
 
       {/* ── Step 1: Language ────────────────────────────────────────────── */}
@@ -405,7 +325,7 @@ export function SetupWizard({ onComplete, onSkip }: Props) {
           />
           <Text dimColor>↑↓ navigate · Enter confirm · Esc skip setup</Text>
           <Text dimColor color="gray">
-            (UI only — system prompts stay in English / 仅影响界面，提示词保持英文)
+            (UI language does not affect Agent interaction quality / 界面语言不影响 Agent 交互效果)
           </Text>
         </Box>
       )}
@@ -415,7 +335,7 @@ export function SetupWizard({ onComplete, onSkip }: Props) {
         <Box flexDirection="column" gap={1}>
           <Text bold>{t('setup.providerSelect.title')}</Text>
           <SelectList
-            items={PROVIDERS}
+            items={OCA_PROVIDER_CATALOG}
             selectedIndex={providerIndex}
             onSelect={setProviderIndex}
           />

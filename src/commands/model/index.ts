@@ -6,7 +6,7 @@ export default {
   type: 'local-jsx',
   name: 'model',
   get description() {
-    return `Set the AI model for Claude Code (currently ${renderModelName(getMainLoopModel())})`
+    return `Set session model (now: ${renderModelName(getMainLoopModel())}). Use /provider to switch vendor + model / 切换厂商与大模型用 /provider`
   },
   argumentHint: '[model]',
   get immediate() {

@@ -21,26 +21,26 @@
 
 ### 简介
 
-OpenCodeAgent 是一个运行在终端的 AI 编程助手，基于 Claude Code CLI 二次开发，专为**中国开发者及需要本地化部署**的场景设计。
+**把「Claude Code 级」终端 Agent 从单一云端，解放到你的键盘上。**  
+OpenCodeAgent 是面向全球开发者魔改并持续演进的 **开源终端 AI 编程助手**：同一套交互与工具链，换模型不换肌肉记忆——本地、国内 API、海外 API，随你组合。
 
-**核心特性：**
+它不是又一个聊天框，而是一台长在终端里的**自主编程引擎**：读仓库、改代码、跑命令、接 MCP、开子 Agent，像资深同事一样跟你结对。我们站在 Claude Code CLI 社区还原版之上，把门槛打穿、把选择权还给你。
 
-- 🌐 **多模型支持** — Anthropic Claude、DeepSeek、阿里百炼（Qwen）、火山引擎（Doubao）、OpenAI 及任意 OpenAI 兼容接口
-- 🏠 **本地优先** — 完整支持 [Ollama](https://ollama.com) 本地模型，数据不出境
-- 🔒 **无强制认证** — 去除 Anthropic OAuth 强制登录，API Key 即可使用
-- 🚫 **无遥测上报** — 彻底移除所有数据上报和云端分析
-- 🌏 **中文界面** — 用户交互层完整中文支持（系统提示词保持英文以保证效果）
-- 🛠️ **完整 Agent 架构** — 保留原版全部 50+ 内置工具、MCP 协议、Agent Swarms 等核心能力
-- 🔌 **MCP 生态扩展** — 支持通过 MCP 协议接入任意外部工具（飞书、钉钉、JIRA 等）
+**为什么值得试：**
+
+- 🚀 **一键多栈** — Claude、DeepSeek、Qwen、Doubao、OpenAI、Ollama、任意 OpenAI 兼容端点；**`/provider`（或 `/llm`）随时切换厂商 + 模型**，`/model` 微调会话内模型，无需改配置文件重来
+- 🏠 **真·本地优先** — 从笔记本到内网机房，模型与代码路径由你掌控；离线场景与合规场景都能玩出花样
+- 🔓 **无锁厂商** — 去掉强制 OAuth 与云端绑定叙事；API Key / Base URL 即正义，配置落盘 `~/.oca`，透明可迁移
+- 🛰️ **零遥测** — 不向第三方汇报你的代码与对话；你的终端，你的数据边界
+- 🌏 **中文友好** — 界面与向导完整中文（系统提示词保持英文以兼顾效果）；英文用户同样一等公民
+- 🧰 **Agent 全家桶** — 50+ 内置工具、MCP、多 Agent 协作等硬核能力沿承原版路线，并持续向「可插拔、可扩展」演进
+- 🔮 **路线图激进** — Profile、插件市场、费用可视化、Node 运行时……欢迎 Star 见证它长大
 
 ### 与官方 Claude Code 的关系
 
-OpenCodeAgent 基于 Claude Code CLI 的社区还原版本进行二次开发，**与 Anthropic 官方无关**。我们在保留完整 Agent 能力的基础上，专注于：
-- 去除云端依赖，支持完全本地化运行
-- 开放模型接入，不绑定单一 AI 提供商
-- 提供中文友好的使用体验
+OpenCodeAgent 基于 **Claude Code CLI 的社区还原版本** 深度二次开发，**与 Anthropic 无官方关联**。我们尊重原创产品形态，在可替代后端、可审计行为与可本地化部署方向上走更远。
 
-> ⚠️ **声明**：本项目为个人开源项目，基于社区反编译还原的 Claude Code 代码进行二次开发。请在使用前确认符合当地法律法规及相关服务条款。
+> ⚠️ **声明**：本项目为社区开源作品；请在遵守当地法律与各 API 服务条款的前提下使用。
 
 ### 快速开始
 
@@ -216,17 +216,26 @@ CLI 参数 > 环境变量 > ~/.oca/settings.json（全局）> .claude/settings.j
 
 ### Introduction
 
-OpenCodeAgent is a terminal-based AI coding assistant, built upon the Claude Code CLI with a focus on **local-first deployment and multi-model support**.
+**Terminal-native. Model-agnostic. Claude Code–grade muscle, without the vendor lock-in story.**  
+OpenCodeAgent is an **open-source, aggressively evolving** coding agent for your shell: the same loops, tools, and habits—whether you point it at Claude, a Chinese cloud API, OpenAI, or a laptop running [Ollama](https://ollama.com).
 
-**Key Features:**
+It is not a chat window with syntax highlighting. It is an **autonomous engineering copilot** that reads your repo, edits files, runs commands, speaks MCP, and spins up sub-agents when work gets parallel. We build on a community-restored Claude Code CLI base and push it toward **pluggable backends, auditable behavior, and true local-first workflows**.
 
-- 🌐 **Multi-Model** — Anthropic Claude, DeepSeek, Alibaba Qwen, Volcengine Doubao, OpenAI, and any OpenAI-compatible API
-- 🏠 **Local-First** — Full [Ollama](https://ollama.com) support, keep your code on-premises
-- 🔒 **No Forced Auth** — Removed mandatory Anthropic OAuth; just use an API Key
-- 🚫 **No Telemetry** — All data reporting and cloud analytics removed
-- 🌏 **i18n Support** — Chinese UI (system prompts remain in English for best results)
-- 🛠️ **Full Agent Architecture** — All 50+ built-in tools, MCP protocol, and Agent Swarms preserved
-- 🔌 **MCP Ecosystem** — Extend with any external tool via Model Context Protocol
+**Why people star it:**
+
+- 🚀 **Swap stacks in seconds** — `/provider` (alias `/llm`) switches **vendor + model** anytime; `/model` tunes the session model. Settings persist to `~/.oca` and apply immediately—no ritual restarts
+- 🏠 **Local-first that means it** — air-gapped labs, regulated industries, or just paranoia-friendly: you choose where inference runs
+- 🔓 **Keys, not ceremonies** — no forced OAuth narrative; API keys & base URLs are first-class. Your config is yours to diff and move
+- 🛰️ **Zero telemetry** — we do not phone home with your code or prompts
+- 🌏 **i18n done seriously** — first-class Chinese UI alongside English; system prompts stay English for quality
+- 🧰 **Full agent stack** — 50+ tools, MCP, multi-agent patterns—inherited DNA, community-driven extensions ahead
+- 🔮 **Ambitious roadmap** — profiles, marketplace, cost visibility, Node runtime—watch the graph go up
+
+### Relationship to Claude Code
+
+Community derivative based on a restored Claude Code CLI codebase—**not affiliated with or endorsed by Anthropic**. We aim to widen who can ship with this interaction model.
+
+> ⚠️ **Disclaimer**: Independent OSS; comply with local laws and each provider’s terms of use.
 
 ### Quick Start
 
@@ -270,12 +279,6 @@ bun run dev
 - [ ] **M3**: Chinese UI + Setup Wizard + Profile system
 - [ ] **M4**: Public release with full documentation
 - [ ] **M5**: Node.js compatibility / Offline-first / Cost tracking
-
-### Relationship to Claude Code
-
-This project is a community-developed derivative based on a reverse-engineered restoration of Anthropic's Claude Code CLI. **It is not affiliated with or endorsed by Anthropic.** We focus on removing cloud dependencies, opening up model selection, and providing a Chinese-friendly experience.
-
-> ⚠️ **Disclaimer**: This is an independent open-source project. Please ensure compliance with applicable laws and terms of service before use.
 
 ### Contributing
 

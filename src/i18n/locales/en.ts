@@ -177,7 +177,7 @@ export const en = {
       bashMode: '! for bash mode',
       commands: '/ for commands',
       filePaths: '@ for file paths',
-      background: '& for background',
+      background: '& for background tasks',
       sideQuestion: '/btw for side question',
       doubleTapClear: 'double tap esc to clear input',
       autoAcceptEdits: 'to auto-accept edits',
@@ -186,11 +186,11 @@ export const en = {
       toggleTasks: '{key} to toggle tasks',
       undo: '{key} to undo',
       suspend: 'ctrl + z to suspend',
-      pasteImages: '{key} paste images',
-      switchModel: '{key} switch model',
-      toggleFastMode: '{key} toggle fast mode',
-      stashPrompt: '{key} stash prompt',
-      editInEditor: '{key} edit in $EDITOR',
+      pasteImages: '{key} to paste images',
+      switchModel: '{key} to switch model',
+      toggleFastMode: '{key} to toggle fast mode',
+      stashPrompt: '{key} to stash prompt',
+      editInEditor: '{key} to edit in $EDITOR',
       customizeKeys: '/keybindings to customize',
     },
     sandbox: {
@@ -224,6 +224,28 @@ export const en = {
       typeSomething: 'Type something',
     },
     pressAgainExit: 'Press {key} again to exit',
+    escToCancel: '{key} to cancel',
+  },
+
+  // ─── HELP ────────────────────────────────────────────────────────────────────
+  help: {
+    title: 'OpenCodeAgent v{version}',
+    tabs: {
+      general: 'general',
+      commands: 'commands',
+      customCommands: 'custom-commands',
+    },
+    general: {
+      description:
+        'OpenCodeAgent understands your codebase, makes edits with your permission, and executes commands — right from your terminal.',
+      shortcuts: 'Shortcuts',
+    },
+    commands: {
+      browseDefault: 'Browse built-in commands:',
+      browseCustom: 'Browse custom commands:',
+      noCustom: 'No custom commands found',
+    },
+    forMoreHelp: 'For more help:',
   },
 
   // ─── TIPS ────────────────────────────────────────────────────────────────────
@@ -257,6 +279,7 @@ export const en = {
     language: {
       title: 'Choose your language',
       hint: 'This only affects the UI. System prompts stay in English.',
+      changed: 'Language changed to {lang}',
     },
     done: {
       title: 'All set!',
@@ -267,6 +290,40 @@ export const en = {
     back: 'Back',
     next: 'Next',
     finish: 'Finish',
+  },
+
+  // ─── LANGUAGE PICKER ─────────────────────────────────────────────────────────
+  language: {
+    title: 'Language / 语言',
+    hint: 'UI only — system prompts stay in English',
+    cancel: 'Esc to cancel',
+    changed: 'Language set to: {lang}',
+  },
+
+  providerCmd: {
+    titlePick: 'Switch AI vendor & model',
+    hintPick: 'Choose backend (Anthropic, OpenAI-compat, Ollama…). Saved to ~/.oca/settings.json',
+    navPick: '↑↓ navigate · Enter configure · Esc cancel',
+    titleConfigure: 'Endpoint & model',
+    hintConfigure: 'Tab switch field · Enter save (applies to this session) · Esc back',
+    vendor: 'Vendor:',
+    keyPlaceholder: '(unchanged if empty)',
+    navConfigure: 'Tab · Enter save · Esc back to vendor list',
+    applied: 'Provider set to {vendor} · model {model}',
+  },
+
+  // ─── ONBOARDING / TRUST ───────────────────────────────────────────────────────
+  onboarding: {
+    security: {
+      title: 'Security notes:',
+      canMakeMistakes: 'OpenCodeAgent can make mistakes',
+      canMakeMistakesDetail:
+        'You should always review responses, especially when running code.',
+      promptInjection: 'Due to prompt injection risks, only use with code you trust',
+    },
+    terminal: {
+      title: "Use OpenCodeAgent's terminal setup?",
+    },
   },
 } as const
 
