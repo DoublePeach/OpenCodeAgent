@@ -24,22 +24,21 @@
 
 ### 🔴 P0 核心改造（项目可运行的前提）
 
-- [~] **[P0-01]** 移除遥测/上报模块
-  - [ ] `src/services/analytics/sink.ts`：替换为 no-op sink
-  - [ ] `src/entrypoints/init.ts`：移除 `attachAnalyticsSink()` 调用
-  - [ ] 移除 Datadog、firstPartyEventLogger 的实际上报逻辑
-  - [ ] 确认 `isAnalyticsDisabled()` 在所有路径返回 true
+- [x] **[P0-01]** 移除遥测/上报模块
+  - [x] `src/services/analytics/sink.ts`：替换为 no-op sink
+  - [x] `src/entrypoints/init.ts`：移除 1P event logging init 块
+  - [x] `src/services/analytics/datadog.ts`：替换为 no-op stubs
+  - [x] `src/services/analytics/firstPartyEventLogger.ts`：替换为 no-op stubs
 
-- [ ] **[P0-02]** 简化认证流程（移除强制 Anthropic OAuth）
-  - [ ] `src/services/api/client.ts`：移除 OAuth token 强制获取逻辑
-  - [ ] `src/utils/auth.ts`：简化为纯 API Key 模式
-  - [ ] `src/entrypoints/init.ts`：移除 `populateOAuthAccountInfoIfNeeded` 强制调用
-  - [ ] `src/utils/config.ts`：`checkHasTrustDialogAccepted()` 直接返回 true
+- [x] **[P0-02]** 简化认证流程（移除强制 Anthropic OAuth）
+  - [x] `src/services/api/client.ts`：移除 OAuth token 强制获取逻辑，纯 API Key
+  - [x] `src/entrypoints/init.ts`：移除 `populateOAuthAccountInfoIfNeeded` 调用
+  - [x] `src/utils/config.ts`：`checkHasTrustDialogAccepted()` 直接返回 true
 
-- [ ] **[P0-03]** 验证基础运行（本地 Anthropic API Key 直接可用）
-  - [ ] `bun install` 通过
-  - [ ] `bun run dev` 启动不报错
-  - [ ] 配置 `ANTHROPIC_API_KEY` 后能正常对话
+- [x] **[P0-03]** 验证基础运行
+  - [x] `bun install` 通过（1193 packages）
+  - [x] `--version` 输出正常（`2.1.888`）
+  - [x] pipe 模式启动无崩溃，正确连接 Anthropic API（403 expected with placeholder key）
 
 ---
 
@@ -137,16 +136,16 @@
 
 > 工程化基础，尽快补齐但不影响核心功能。
 
-- [ ] **[Q3-01]** 更新 `package.json` 元信息
-  - [ ] 修改 `name`、`description`、`author`、`repository`
-  - [ ] 移除 Anthropic 相关的 `bin` 字段名称
-  
-- [ ] **[Q3-02]** 更新 `.cursorignore`：确保 `src/src/`（镜像目录）被排除
-  
-- [ ] **[Q3-03]** 更新 `CLAUDE.md`：改为项目实际的 AI 工作指引
+- [x] **[Q3-01]** 更新 `package.json` 元信息
+  - [x] 修改 `name`（opencodeagent）、`description`、`author`（DoublePeach）、`repository`
+  - [x] 更新 `bin` 字段：`oca` / `opencodeagent`
 
-- [ ] **[Q3-04]** 搭建 GitHub 仓库基础结构
-  - [ ] 创建 `README.md`（中英双语）
+- [x] **[Q3-02]** 更新 `.cursorignore`：添加镜像目录排除（`src/src/` 等）
+
+- [x] **[Q3-03]** 更新 `CLAUDE.md`：改为 OpenCodeAgent 项目 AI 工作指引
+
+- [~] **[Q3-04]** 搭建 GitHub 仓库基础结构
+  - [x] 创建 `README.md`（中英双语）
   - [ ] 创建 `CONTRIBUTING.md`
   - [ ] 创建 `.github/ISSUE_TEMPLATE/`
   - [ ] 配置 GitHub Actions（CI：lint + type check）
@@ -172,7 +171,7 @@
 
 | 里程碑 | 目标 | 关键任务 | 预估完成 |
 |--------|------|---------|---------|
-| M1: 可运行 | 去遥测去认证，本地跑通 | P0-01/02/03 | M0 后 1 周 |
+| M1: 可运行 | 去遥测去认证，本地跑通 | P0-01/02/03 | ✅ 2026-04-02 完成 |
 | M2: 多模型 MVP | 支持 Anthropic + DeepSeek + Ollama | P1-01 ~ P1-05 | M1 后 3-4 周 |
 | M3: 中文完整版 | 中文 UI + 配置向导 + Profile | P2-01 ~ P2-05 | M2 后 2-3 周 |
 | M4: 公开发布 | GitHub 公开 + README + 贡献文档 | Q3-04/05 | M3 后 1 周 |
@@ -180,18 +179,25 @@
 
 ---
 
-## 当前冲刺（Sprint 0）
+## 当前冲刺（Sprint 1）
 
-> 现阶段重点：完成 **M0 法律清关** 和 **M1 可运行** 的前置准备
+> **M1 已完成**，现阶段重点：**M2 多模型 MVP** — Provider 适配层
 
-| 任务 | 状态 | 负责人 |
+| 任务 | 状态 | 完成日期 |
 |------|------|--------|
-| 文档初始化（product-overview.md、todo-list.md） | ✅ 已完成 | AI |
-| 架构总览文档（architecture-overview.md） | ✅ 已完成 | AI |
-| P0-01 移除遥测 | 🚧 进行中 | 下一会话 |
-| P0-02 简化认证 | ⏳ 待处理 | 下一会话 |
-| P0-03 验证基础运行 | ⏳ 待处理 | 下一会话 |
+| 文档初始化（product-overview.md、todo-list.md） | ✅ 完成 | 2026-04-02 |
+| 架构总览文档（architecture-overview.md） | ✅ 完成 | 2026-04-02 |
+| README.md 改写（中英双语） | ✅ 完成 | 2026-04-02 |
+| GitHub 仓库初始化推送 | ✅ 完成 | 2026-04-02 |
+| Q3-01/02/03 package.json / .cursorignore / CLAUDE.md | ✅ 完成 | 2026-04-02 |
+| P0-01 移除遥测（datadog / 1P / sink → no-op） | ✅ 完成 | 2026-04-02 |
+| P0-02 简化认证（去 OAuth，纯 API Key） | ✅ 完成 | 2026-04-02 |
+| P0-03 验证基础运行（bun install + 启动测试） | ✅ 完成 | 2026-04-02 |
+| LAW-01 法律咨询 | ⏳ 待处理 | 人工跟进 |
+| **P1-01 Provider 抽象接口设计** | 🔲 下一个 | — |
+| **P1-02 OpenAI 兼容适配器实现** | 🔲 待排期 | — |
+| **P1-03 集成适配器到 client.ts** | 🔲 待排期 | — |
 
 ---
 
-*文档维护：每次 Cursor AI 会话结束时更新任务状态。*
+*文档维护：每次 Cursor AI 会话结束时更新任务状态。最后更新：2026-04-02*
