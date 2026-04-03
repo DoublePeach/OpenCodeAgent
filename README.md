@@ -14,10 +14,11 @@
 [English](#english) · [中文](#中文)
 
 </div>
-
 ---
 ![首页图片](./docs/IntroductionDiagram/firstpage.png)
 Star + Fork 快速留存项目。
+Github 项目地址：https://github.com/DoublePeach/OpenCodeAgent
+Gitee 项目地址：https://gitee.com/doublepeach/OpenCodeAgent
 ### 简介
 基于3月31日的CC事件而诞生的项目，完整修复版本、去除繁杂的原厂限制、支持本地私有化部署、支持多模型适配、例如阿里百炼、火山引擎、OpenAI、DeepSeek等，还支持本地Ollama接入。甚至还加了中文适配，国人也可以简单上手CC享受顶级大厂的Agent产品体验！欢迎Star！
 **把「Claude Code 级」终端 Agent 从单一云端，解放到你的键盘上。**  
